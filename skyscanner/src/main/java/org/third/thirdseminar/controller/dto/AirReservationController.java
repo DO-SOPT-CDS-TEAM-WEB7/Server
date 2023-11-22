@@ -5,7 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.third.thirdseminar.common.ApiResponse;
 import org.third.thirdseminar.controller.dto.reqeust.AirReservationReqeust;
+import org.third.thirdseminar.controller.dto.reqeust.CreateReservationRequest;
 import org.third.thirdseminar.controller.dto.response.AirReservationResponse;
+import org.third.thirdseminar.controller.dto.response.CreateReservationResponse;
 import org.third.thirdseminar.exception.Success;
 import org.third.thirdseminar.service.ReservationService;
 
@@ -21,7 +23,7 @@ public class AirReservationController {
     }
 
     @PostMapping("/reservation")
-    public ApiResponse<CreateReserverationResponse> createReservertaion(@RequestBody CreateReservationReqeust request){
+    public ApiResponse<CreateReservationResponse> createReservertaion(@RequestBody CreateReservationRequest request){
         return ApiResponse.success(Success.CREATE_RESERVATION_SUCCESS,reservationServcie.createReservation(request));
     }
 }

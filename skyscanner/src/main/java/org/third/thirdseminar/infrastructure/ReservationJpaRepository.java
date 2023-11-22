@@ -6,4 +6,5 @@ import org.third.thirdseminar.domain.Reservation;
 import java.util.List;
 
 public interface ReservationJpaRepository extends JpaRepository<Reservation,Long> {
+
 }
