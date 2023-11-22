@@ -14,7 +14,8 @@ public enum Success {
 	/**
 	 * 201 CREATED
 	 */
-	CREATE_MEMBER_SUCCESS(HttpStatus.CREATED, "유저 생성 완-벽"),
+	CREATE_RESERVATION_SUCCESS(HttpStatus.CREATED, "예약 사이트로 이동 중 입니다."),
+
 
 	/**
 	 * 200 OK
