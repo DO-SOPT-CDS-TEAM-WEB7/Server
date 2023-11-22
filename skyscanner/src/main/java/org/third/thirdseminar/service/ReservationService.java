@@ -14,6 +14,7 @@ import org.third.thirdseminar.infrastructure.TickectJpaRepository;
 
 import java.sql.Time;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -46,14 +47,19 @@ public class ReservationService {
         Optional<Ticket> ticket = tickectJpaRepository.findById(request.ticketId());
         Reservation reservation = ticket.get().getReservation();
 
-        return CreateReservationResponse.of(reservation.getStartTime().getStart(), reservation.getEndTime().getEnd(), String.format("￦%,d", ticket.get().getPrice()));
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String startDateTime = simpleDateFormat.format(reservation.getStartDate()) + " "+ reservation.getStartTime().getStart().format(DateTimeFormatter.ofPattern( "a H:mm" ));
+        String endDateTime = simpleDateFormat.format(reservation.getEndDate()) + " " + reservation.getEndTime().getStart().format(DateTimeFormatter.ofPattern( "a H:mm" ));
+
+        return CreateReservationResponse.of(startDateTime, endDateTime, String.format("￦%,d", ticket.get().getPrice()));
 
     }
 
     public TimeRangeDto TimeRangeFormat(TimeRange timeRange){
-        String startTime = timeRange.getStart().format( DateTimeFormatter.ofPattern( "HH:mm" ));
-        String endTime = timeRange.getEnd().format( DateTimeFormatter.ofPattern( "HH:mm" ));
-        String during = timeRange.getDuring().format(DateTimeFormatter.ofPattern("HH시간 mm분"));
+        String startTime = timeRange.getStart().format( DateTimeFormatter.ofPattern( "H:mm" ));
+        String endTime = timeRange.getEnd().format( DateTimeFormatter.ofPattern( "H:mm" ));
+        String during = timeRange.getDuring().format(DateTimeFormatter.ofPattern("H시간 mm분"));
 
         return new TimeRangeDto(startTime, endTime, during);
     }
