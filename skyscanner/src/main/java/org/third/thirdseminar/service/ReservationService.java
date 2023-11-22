@@ -15,6 +15,7 @@ import org.third.thirdseminar.infrastructure.ReservationJpaRepository;
 import org.third.thirdseminar.infrastructure.TickectJpaRepository;
 
 import java.sql.Time;
+import java.text.DecimalFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class ReservationService {
 
     private final ReservationJpaRepository reservationJpaRepository;
     private final TickectJpaRepository tickectJpaRepository;
+    private final DecimalFormat df = new DecimalFormat("###,###");
 
     public AirReservationResponse getReservations(AirReservationReqeust reqeust){
         List<Reservation> reservations = reservationJpaRepository.findAll();
@@ -35,9 +37,8 @@ public class ReservationService {
         List<AirDto> airList = new ArrayList<>();
         for(Reservation reservation : reservations){
             List<Ticket> ticket= tickectJpaRepository.findByReservationIdOrderByPriceAsc(reservation.getId());
-            airList.add(AirDto.of(reservation, ticket.get(0).getPrice(), TimeRangeFormat(reservation.getStartTime()), TimeRangeFormat(reservation.getEndTime())));
+            airList.add(AirDto.of(reservation, df.format(ticket.get(0).getPrice()), TimeRangeFormat(reservation.getStartTime()), TimeRangeFormat(reservation.getEndTime())));
         }
-
         DateDto dateDto = new DateDto(reqeust.startDate(), reqeust.endDate());
         return new AirReservationResponse(dateDto, airList);
     }

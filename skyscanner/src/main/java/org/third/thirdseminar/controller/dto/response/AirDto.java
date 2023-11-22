@@ -10,10 +10,10 @@ public record AirDto (
         String airName,
         TimeRangeDto startTime,
         TimeRangeDto endTime,
-        Long price,
+        String price,
         int CO2
 ){
-    public static AirDto of(Reservation reservation, Long price, TimeRangeDto startTime, TimeRangeDto endTime) {
+    public static AirDto of(Reservation reservation, String price, TimeRangeDto startTime, TimeRangeDto endTime) {
         return new AirDto(
                 reservation.getId(),
                 reservation.getAir().getAirName(),
