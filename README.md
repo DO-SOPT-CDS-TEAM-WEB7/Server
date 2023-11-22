@@ -1,5 +1,6 @@
 ## SkyScanner
 SkyScanner를 리디자인한 프로젝트
+<img width="830" alt="스크린샷 2023-11-22 오후 10 17 37" src="https://github.com/DO-SOPT-CDS-TEAM-WEB7/Server/assets/92644651/833b30d3-e68e-4711-ac13-9ef9a99f081f">
 
 <br>
 
@@ -17,15 +18,40 @@ SkyScanner를 리디자인한 프로젝트
 <br><br>
 
 ## 📜서버 API 명세서
-명세서 보러가기 -> [API Docs](https://www.notion.so/a2d1c7f0d9814632a199d9c79215924c?pvs=21)
+<img width="870" alt="스크린샷 2023-11-22 오후 10 54 07" src="https://github.com/DO-SOPT-CDS-TEAM-WEB7/Server/assets/92644651/7e256d2e-edd5-41dc-a94a-be88356ca300">
+
+명세서 보러가기 : [API Docs](https://www.notion.so/a2d1c7f0d9814632a199d9c79215924c?pvs=21)
 <br><br>
 
-## ERD
+## 📦 ERD
 <img width="860" alt="스크린샷 2023-11-22 오후 9 38 31" src="https://github.com/DO-SOPT-CDS-TEAM-WEB7/Server/assets/92644651/88e12150-f54c-4e8b-9be4-476199812fbe">
 <br><br>
 
-## 아키텍처
+## 🧬 구조도
+![구조도](https://github.com/DO-SOPT-CDS-TEAM-WEB7/Server/assets/92644651/0e7e7122-2fb9-4d73-b856-e29518e533fb)
 
+<br><br>
+
+## 📂 폴더 구조도
+```
+├── 📂.github
+├── 📂 main
+	├── 🗂️ resources
+		├── 📕 application.yml
+	├── 📂 controller(컨트롤러 파일)
+		├── 🗂️ dto
+		 ├──🗂️ request
+		 ├──🗂️ response
+	├── 📂 domain(엔티티 파일)
+	├── 📂 infrastructure(레포지토리 폴더)
+	├── 📂 service(서비스 파일)
+	├── 📂 exception(Exception enum, Exception class 파일)
+		├── 🗂️ model
+	├── 📂 common(공용 클래스 관리)
+		├──🗂️ advice
+		├──🗂️ dto
+```
+<br><br>
 
 ## 🤝 Code Convention
 ### ✓ File Naming
