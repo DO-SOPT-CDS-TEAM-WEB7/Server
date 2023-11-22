@@ -3,20 +3,22 @@ package org.third.thirdseminar.controller.dto.response;
 import org.third.thirdseminar.domain.Reservation;
 import org.third.thirdseminar.domain.TimeRange;
 
+import java.sql.Time;
+
 public record AirDto (
         Long airId,
         String airName,
-        TimeRange startTime,
-        TimeRange endTime,
+        TimeRangeDto startTime,
+        TimeRangeDto endTime,
         Long price,
         int CO2
 ){
-    public static AirDto of(Reservation reservation, Long price) {
+    public static AirDto of(Reservation reservation, Long price, TimeRangeDto startTime, TimeRangeDto endTime) {
         return new AirDto(
                 reservation.getId(),
                 reservation.getAir().getAirName(),
-                reservation.getStartTime(),
-                reservation.getEndTime(),
+                startTime,
+                endTime,
                 price,
                 reservation.getAir().getCO2()
         );

@@ -12,7 +12,7 @@ public class DateDto {
     private String endDate;
 
     public DateDto(Date startDate, Date endDate){
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일 E");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd E");
         this.startDate = simpleDateFormat.format(startDate);
         this.endDate = simpleDateFormat.format(endDate);
     }
