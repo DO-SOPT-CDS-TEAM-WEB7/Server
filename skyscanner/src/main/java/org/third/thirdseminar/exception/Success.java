@@ -20,7 +20,7 @@ public enum Success {
 	/**
 	 * 200 OK
 	 */
-
+	GET_AIR_MINPRICE_SUCESS(HttpStatus.OK, "항공사별 최저가격 조회 성공"),
 	GET_RESERVATION_SUCCESS(HttpStatus.OK, "항공권 페이지 조회 성공"),
 	GET_MAIN_SUCCESS(HttpStatus.OK, "메인 페이지 조회 성공"),
 	GET_TICKET_SUCCESS(HttpStatus.OK, "티켓 선택 페이지 조회 성공"),
