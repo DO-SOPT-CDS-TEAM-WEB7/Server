@@ -1,5 +1,6 @@
 package org.third.thirdseminar.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,15 +45,15 @@ public class ReservationService {
     }
 
     public CreateReservationResponse createReservation(CreateReservationRequest request){
-        Optional<Ticket> ticket = tickectJpaRepository.findById(request.ticketId());
-        Reservation reservation = ticket.get().getReservation();
+        Ticket ticket = tickectJpaRepository.findById(request.ticketId().longValue()).orElseThrow(()-> new EntityNotFoundException("없는 항공편입니다."));
+        Reservation reservation = ticket.getReservation();
 
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String startDateTime = simpleDateFormat.format(reservation.getStartDate()) + " "+ reservation.getStartTime().getStart().format(DateTimeFormatter.ofPattern( "a H:mm" ));
         String endDateTime = simpleDateFormat.format(reservation.getEndDate()) + " " + reservation.getEndTime().getStart().format(DateTimeFormatter.ofPattern( "a H:mm" ));
 
-        return CreateReservationResponse.of(startDateTime, endDateTime, String.format("￦%,d", ticket.get().getPrice()));
+        return CreateReservationResponse.of(startDateTime, endDateTime, ticket.getCompanyName(),String.format("￦%,d", ticket.getPrice()));
 
     }
 
