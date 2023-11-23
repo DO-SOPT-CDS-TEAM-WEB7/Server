@@ -1,4 +1,4 @@
-package org.third.thirdseminar.controller.dto.reqeust;
+package org.third.thirdseminar.controller.dto.request;
 
 import java.util.Date;
 

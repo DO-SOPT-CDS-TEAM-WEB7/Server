@@ -9,21 +9,18 @@ import org.third.thirdseminar.controller.dto.response.AirDto;
 import org.third.thirdseminar.controller.dto.response.AirReservationResponse;
 import org.third.thirdseminar.controller.dto.response.DateDto;
 import org.third.thirdseminar.controller.dto.response.TimeRangeDto;
-import org.third.thirdseminar.controller.dto.reqeust.AirReservationReqeust;
-import org.third.thirdseminar.controller.dto.reqeust.CreateReservationRequest;
+import org.third.thirdseminar.controller.dto.request.CreateReservationRequest;
 import org.third.thirdseminar.controller.dto.response.*;
 import org.third.thirdseminar.domain.Reservation;
 import org.third.thirdseminar.domain.ReservationResult;
 import org.third.thirdseminar.domain.Ticket;
 import org.third.thirdseminar.domain.TimeRange;
 import org.third.thirdseminar.infrastructure.ReservationJpaRepository;
-import org.third.thirdseminar.infrastructure.TicketJpaRepository;
 import org.third.thirdseminar.infrastructure.ReservationResultJpaRepository;
-import org.third.thirdseminar.infrastructure.TickectJpaRepository;
+import org.third.thirdseminar.infrastructure.TicketJpaRepository;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +31,7 @@ import java.util.List;
 public class ReservationService {
 
     private final ReservationJpaRepository reservationJpaRepository;
-    private final TickectJpaRepository tickectJpaRepository;
+    private final TicketJpaRepository tickectJpaRepository;
     private final ReservationResultJpaRepository reservationResultJpaRepository;
     private final DecimalFormat df = new DecimalFormat("###,###");
 
@@ -43,7 +40,7 @@ public class ReservationService {
 
         List<AirDto> airList = new ArrayList<>();
         for(Reservation reservation : reservations){
-            List<Ticket> ticket= ticketJpaRepository.findByReservationIdOrderByPriceAsc(reservation.getId());
+            List<Ticket> ticket= tickectJpaRepository.findByReservationIdOrderByPriceAsc(reservation.getId());
             airList.add(AirDto.of(reservation, df.format(ticket.get(0).getPrice()), TimeRangeFormat(reservation.getStartTime()), TimeRangeFormat(reservation.getEndTime())));
         }
         DateDto dateDto = new DateDto(reqeust.startDate(), reqeust.endDate());

@@ -14,4 +14,5 @@ public interface TicketJpaRepository extends JpaRepository<Ticket, Long> {
 
 	List<Ticket> findByReservationIdOrderByPriceAsc(Long airId);
 
+
 }
