@@ -24,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -64,6 +65,19 @@ public class ReservationService {
         return CreateReservationResponse.of(startDateTime, endDateTime, ticket.getCompanyName(),String.format("￦%,d", ticket.getPrice()));
 
     }
+
+    public AirMinPriceResponse getAirMinPrices(){
+        List<AirMinPriceDto> airMinPrices = tickectJpaRepository.findMinPricesByAirId().stream().map(
+                row -> AirMinPriceDto.of(
+                        (Long) row[0],        // airId
+                        (String) row[1],      // airName
+                        (Long) row[2] // minPriceString
+                )).collect(Collectors.toList());
+
+        return new AirMinPriceResponse(airMinPrices);
+
+    }
+
 
     private TimeRangeDto TimeRangeFormat(TimeRange timeRange){
         String startTime = timeRange.getStart().format( DateTimeFormatter.ofPattern( "H:mm" ));
