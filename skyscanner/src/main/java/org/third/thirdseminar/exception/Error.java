@@ -13,7 +13,9 @@ public enum Error {
 	/**
 	 * 404 NOT FOUND
 	 */
-	USER_NOT_FOUND(HttpStatus.NOT_FOUND, "유저를 찾지 못했어요~"),
+	DUMMY_NOT_FOUND(HttpStatus.NOT_FOUND, "더미에 데이터가 덜 들어간 것 같아요"),
+
+	AIR_NOT_FOUND(HttpStatus.NOT_FOUND, "항공사를 찾지 못했어요."),
 	/**
 	 * 500 INTERNAL_SERVER_ERROR
 	 */
