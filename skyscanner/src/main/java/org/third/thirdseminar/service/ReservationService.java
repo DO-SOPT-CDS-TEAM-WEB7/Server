@@ -21,8 +21,10 @@ import org.third.thirdseminar.infrastructure.TicketJpaRepository;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,9 +60,9 @@ public class ReservationService {
                         .reservation(reservation)
                         .ticket(ticket).build());
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String startDateTime = simpleDateFormat.format(reservation.getStartDate()) + " "+ reservation.getStartTime().getStart().format(DateTimeFormatter.ofPattern( "a H:mm" ));
-        String endDateTime = simpleDateFormat.format(reservation.getEndDate()) + " " + reservation.getEndTime().getStart().format(DateTimeFormatter.ofPattern( "a H:mm" ));
+
+        String startDateTime = reservationDateFormat(reservation.getStartDate(), reservation.getStartTime().getStart());
+        String endDateTime = reservationDateFormat(reservation.getEndDate(), reservation.getEndTime().getStart());
 
         return CreateReservationResponse.of(startDateTime, endDateTime, ticket.getCompanyName(),String.format("￦%,d", ticket.getPrice()));
 
@@ -85,5 +87,11 @@ public class ReservationService {
         String during = timeRange.getDuring().format(DateTimeFormatter.ofPattern("H시간 mm분"));
 
         return new TimeRangeDto(startTime, endTime, during);
+    }
+
+    private String reservationDateFormat(Date date, LocalTime time){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        return simpleDateFormat.format(date) + " " + time.format(DateTimeFormatter.ofPattern("a H:mm"));
     }
 }
