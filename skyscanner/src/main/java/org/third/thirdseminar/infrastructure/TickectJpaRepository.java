@@ -9,5 +9,4 @@ import java.util.Optional;
 public interface TickectJpaRepository extends JpaRepository<Ticket,Long> {
     List<Ticket> findByReservationIdOrderByPriceAsc(Long airId);
 
-    Optional<Ticket> findById(Long tickId);
 }
