@@ -1,7 +1,7 @@
 package org.third.thirdseminar.domain;
 
-
 import jakarta.persistence.*;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

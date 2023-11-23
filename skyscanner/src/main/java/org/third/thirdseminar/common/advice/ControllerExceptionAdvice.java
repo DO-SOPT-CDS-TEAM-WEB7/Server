@@ -1,6 +1,4 @@
 package org.third.thirdseminar.common.advice;
-
-
 import org.third.thirdseminar.common.ApiResponse;
 import org.third.thirdseminar.exception.model.CustomException;
 import org.springframework.http.ResponseEntity;

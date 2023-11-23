@@ -11,4 +11,7 @@ import org.third.thirdseminar.domain.Ticket;
 public interface TicketJpaRepository extends JpaRepository<Ticket, Long> {
 	@Query("SELECT t FROM Ticket t WHERE t.ticketId IN :ticketIds AND t.price = (SELECT MIN(tt.price) FROM Ticket tt WHERE tt.ticketId IN :ticketIds)")
 	List<Ticket> findTicketWithMinPrice(@Param("ticketIds") List<Long> ticketIds);
+
+	List<Ticket> findByReservationIdOrderByPriceAsc(Long airId);
+
 }

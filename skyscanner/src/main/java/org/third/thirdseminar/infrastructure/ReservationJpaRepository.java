@@ -11,4 +11,5 @@ public interface ReservationJpaRepository extends JpaRepository<Reservation, Lon
 	@Query("SELECT r FROM Reservation r WHERE r.cityName <> :cityName")
 	List<Reservation> findAllExcludingCity(@Param("cityName") String cityName);
 
+	Reservation findByAir_AirId(@Param("airId") Long airId);
 }

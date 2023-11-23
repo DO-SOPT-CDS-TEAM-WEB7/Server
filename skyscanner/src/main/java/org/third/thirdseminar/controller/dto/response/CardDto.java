@@ -1,4 +1,4 @@
-package org.third.thirdseminar.dto.response;
+package org.third.thirdseminar.controller.dto.response;
 
 public record CardDto(String cityName, String country, String startDate, String endDate, String companyAir, String minPriceString) {
 	public static CardDto of(String cityName, String country,String startDate,String endDate, String companyAir, String minPriceString){

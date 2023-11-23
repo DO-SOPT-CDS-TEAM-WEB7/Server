@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.third.thirdseminar.domain.Ticket;
-import org.third.thirdseminar.dto.response.CardDto;
+import org.third.thirdseminar.controller.dto.response.CardDto;
 import org.third.thirdseminar.infrastructure.ReservationJpaRepository;
 import org.third.thirdseminar.infrastructure.TicketJpaRepository;
 
@@ -24,7 +24,7 @@ public class MainService {
 	private final TicketJpaRepository ticketJpaRepository;
 
 	public List<CardDto> getCards(){
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd E요일", Locale.KOREAN);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd E");
 		NumberFormat priceFormat = NumberFormat.getCurrencyInstance();
 		priceFormat.setCurrency(Currency.getInstance("KRW"));
 		return reservationJpaRepository.findAllExcludingCity("삿포로").stream().map((reservation)->

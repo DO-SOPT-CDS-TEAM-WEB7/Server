@@ -1,4 +1,4 @@
-package org.third.thirdseminar.dto.response;
+package org.third.thirdseminar.controller.dto.response;
 
 import java.util.List;
 
