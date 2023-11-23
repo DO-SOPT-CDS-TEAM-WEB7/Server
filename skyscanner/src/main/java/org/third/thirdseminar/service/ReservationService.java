@@ -43,7 +43,7 @@ public class ReservationService {
         return new AirReservationResponse(dateDto, airList);
     }
 
-    public TimeRangeDto TimeRangeFormat(TimeRange timeRange){
+    private TimeRangeDto TimeRangeFormat(TimeRange timeRange){
         String startTime = timeRange.getStart().format( DateTimeFormatter.ofPattern( "HH:mm" ));
         String endTime = timeRange.getEnd().format( DateTimeFormatter.ofPattern( "HH:mm" ));
         String during = timeRange.getDuring().format(DateTimeFormatter.ofPattern("HH시간 mm분"));
