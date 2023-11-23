@@ -2,6 +2,9 @@ package org.third.thirdseminar.exception;
 
 import org.springframework.http.HttpStatus;
 
+
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -17,6 +20,8 @@ public enum Success {
 	/**
 	 * 200 OK
 	 */
+
+	GET_RESERVATION_SUCCESS(HttpStatus.OK, "항공권 페이지 조회 성공"),
 	GET_MEMBER_SUCCESS(HttpStatus.OK, "유저 조회 성공~"),
 	GET_MEMBERS_SUCCESS(HttpStatus.OK, "유저 전체조회 성공~"),
 

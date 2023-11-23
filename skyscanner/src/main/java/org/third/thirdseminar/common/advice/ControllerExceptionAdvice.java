@@ -1,7 +1,8 @@
 package org.third.thirdseminar.common.advice;
 
-import org.third.thirdseminar.exception.model.CustomException;
+
 import org.third.thirdseminar.common.ApiResponse;
+import org.third.thirdseminar.exception.model.CustomException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ExceptionHandler;

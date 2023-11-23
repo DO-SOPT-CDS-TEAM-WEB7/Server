@@ -10,4 +10,5 @@ import org.third.thirdseminar.domain.Reservation;
 public interface ReservationJpaRepository extends JpaRepository<Reservation, Long> {
 	@Query("SELECT r FROM Reservation r WHERE r.cityName <> :cityName")
 	List<Reservation> findAllExcludingCity(@Param("cityName") String cityName);
+
 }

@@ -1,10 +1,7 @@
 package org.third.thirdseminar.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,22 +12,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access= AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Ticket {
-	@Id @GeneratedValue
-	private Long ticketId;
 
-	private String companyName;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long ticketId;
 
-	private int stars;
+    private String companyName;
 
-	private int comment;
+    private int stars;
 
-	private String card;
+    private int comment;
 
-	private Long price;
+    private String card;
 
-	@ManyToOne
-	@JoinColumn(name="reservation_id")
-	private Reservation reservation;
+    private Long price;
 
+    @ManyToOne
+    @JoinColumn(name="reservation_id")
+    private Reservation reservation;
 
 }

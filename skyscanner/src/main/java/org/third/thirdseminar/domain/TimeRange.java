@@ -2,11 +2,10 @@ package org.third.thirdseminar.domain;
 
 import java.time.LocalTime;
 
-import jakarta.persistence.Embeddable;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.sql.Time;
 
 @Embeddable
 @Getter
@@ -17,3 +16,4 @@ public class TimeRange {
 	private LocalTime during;
 	private LocalTime end;
 }
+
