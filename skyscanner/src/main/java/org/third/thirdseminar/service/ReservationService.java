@@ -73,7 +73,7 @@ public class ReservationService {
                 row -> AirMinPriceDto.of(
                         (Long) row[0],        // airId
                         (String) row[1],      // airName
-                        (Long) row[2] // minPriceString
+                        df.format(row[2])+"원부터" // minPriceString
                 )).collect(Collectors.toList());
 
         return new AirMinPriceResponse(airMinPrices);
