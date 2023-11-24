@@ -14,5 +14,9 @@ public interface TicketJpaRepository extends JpaRepository<Ticket, Long> {
 
 	List<Ticket> findByReservationIdOrderByPriceAsc(Long airId);
 
+	@Query("SELECT r.air.airId, r.air.airName, MIN(t.price) FROM Ticket t JOIN Reservation r ON t.ticketId = r.id  GROUP BY r.air.airId, r.air.airName ORDER BY r.air.airName")
+	List<Object[]> findMinPricesByAirId();
+
+
 
 }
