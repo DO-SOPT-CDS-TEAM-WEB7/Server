@@ -11,10 +11,7 @@ import org.third.thirdseminar.controller.dto.response.DateDto;
 import org.third.thirdseminar.controller.dto.response.TimeRangeDto;
 import org.third.thirdseminar.controller.dto.request.CreateReservationRequest;
 import org.third.thirdseminar.controller.dto.response.*;
-import org.third.thirdseminar.domain.Reservation;
-import org.third.thirdseminar.domain.ReservationResult;
-import org.third.thirdseminar.domain.Ticket;
-import org.third.thirdseminar.domain.TimeRange;
+import org.third.thirdseminar.domain.*;
 import org.third.thirdseminar.infrastructure.ReservationJpaRepository;
 import org.third.thirdseminar.infrastructure.ReservationResultJpaRepository;
 import org.third.thirdseminar.infrastructure.TicketJpaRepository;
@@ -39,12 +36,17 @@ public class ReservationService {
     private final DecimalFormat df = new DecimalFormat("###,###");
 
     public AirReservationResponse getReservations(AirReservationRequest reqeust){
-        List<Reservation> reservations = reservationJpaRepository.findAll();
+        List<ReservationMinPriceDTO> reservationMinPriceDtoList = reservationJpaRepository.findReservations("일본").stream().map(
+                row -> ReservationMinPriceDTO.of(
+                        (Reservation) row[0],
+                        (Long) row[1]
+                )).toList();
+
 
         List<AirDto> airList = new ArrayList<>();
-        for(Reservation reservation : reservations){
-            List<Ticket> ticket= tickectJpaRepository.findByReservationIdOrderByPriceAsc(reservation.getId());
-            airList.add(AirDto.of(reservation, df.format(ticket.get(0).getPrice()), TimeRangeFormat(reservation.getStartTime()), TimeRangeFormat(reservation.getEndTime())));
+        for(ReservationMinPriceDTO reservationMinPriceDTO : reservationMinPriceDtoList){
+            Reservation reservation = reservationMinPriceDTO.reservation();
+            airList.add(AirDto.of(reservation, df.format(reservationMinPriceDTO.minPrice()), TimeRangeFormat(reservation.getStartTime()), TimeRangeFormat(reservation.getEndTime())));
         }
         DateDto dateDto = new DateDto(reqeust.startDate(), reqeust.endDate());
         return new AirReservationResponse(dateDto, airList);
