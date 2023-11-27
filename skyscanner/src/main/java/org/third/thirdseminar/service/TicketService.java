@@ -54,7 +54,7 @@ public class TicketService {
 
 		return AirResultDto.of(
 			dateDto,
-			air.getAirId(),
+			reservation.getId(),
 			air.getAirName(),
 			TimeRangeFormat(reservation.getStartTime()),
 			TimeRangeFormat(reservation.getEndTime())
