@@ -2,7 +2,7 @@ package org.third.thirdseminar.controller.dto.response;
 
 import org.third.thirdseminar.domain.Reservation;
 
-public record AirDto (
+public record ReservationDto (
         Long reservationId,
         String airName,
         TimeRangeDto startTime,
@@ -10,8 +10,8 @@ public record AirDto (
         String price,
         int CO2
 ){
-    public static AirDto of(Reservation reservation, String price, TimeRangeDto startTime, TimeRangeDto endTime) {
-        return new AirDto(
+    public static ReservationDto of(Reservation reservation, String price, TimeRangeDto startTime, TimeRangeDto endTime) {
+        return new ReservationDto(
                 reservation.getId(),
                 reservation.getAir().getAirName(),
                 startTime,

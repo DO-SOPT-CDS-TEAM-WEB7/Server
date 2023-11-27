@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.third.thirdseminar.controller.dto.request.AirReservationRequest;
-import org.third.thirdseminar.controller.dto.response.AirDto;
 import org.third.thirdseminar.controller.dto.response.AirReservationResponse;
 import org.third.thirdseminar.controller.dto.response.DateDto;
 import org.third.thirdseminar.controller.dto.response.TimeRangeDto;
@@ -43,10 +42,10 @@ public class ReservationService {
                 )).toList();
 
 
-        List<AirDto> airList = new ArrayList<>();
+        List<ReservationDto> airList = new ArrayList<>();
         for(ReservationMinPriceDTO reservationMinPriceDTO : reservationMinPriceDtoList){
             Reservation reservation = reservationMinPriceDTO.reservation();
-            airList.add(AirDto.of(reservation, df.format(reservationMinPriceDTO.minPrice()), TimeRangeFormat(reservation.getStartTime()), TimeRangeFormat(reservation.getEndTime())));
+            airList.add(ReservationDto.of(reservation, df.format(reservationMinPriceDTO.minPrice()), TimeRangeFormat(reservation.getStartTime()), TimeRangeFormat(reservation.getEndTime())));
         }
         DateDto dateDto = new DateDto(reqeust.startDate(), reqeust.endDate());
         return new AirReservationResponse(dateDto, airList);
