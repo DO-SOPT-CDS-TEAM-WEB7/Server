@@ -3,6 +3,7 @@ package org.third.thirdseminar.service;
 import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -45,10 +46,12 @@ public class TicketService {
 	}
 
 	public AirResultDto getAirInformation(TicketRequestDto ticketRequestDto){
-		Air air= airJpaRepository.findById(ticketRequestDto.airId())
-			.orElseThrow(()-> new NotFoundException(Error.AIR_NOT_FOUND,Error.AIR_NOT_FOUND.getMessage()));	//air 객체 주워오기
+		Reservation reservation = reservationJpaRepository.findById(ticketRequestDto.reservationId())
+			.orElseThrow( ()-> new NotFoundException(Error.RESERVATION_NOT_FOUND, Error.RESERVATION_NOT_FOUND.getMessage())
+		);
+		Air air= reservation.getAir();
 		DateDto dateDto = new DateDto(ticketRequestDto.startDate(), ticketRequestDto.endDate());	//date 객체 주워오기
-		Reservation reservation = reservationJpaRepository.findByAir_AirId(air.getAirId());
+
 		return AirResultDto.of(
 			dateDto,
 			air.getAirId(),
