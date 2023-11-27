@@ -16,6 +16,7 @@ public class ApiResponse<T> {
 	private final String message;
 	private T data;
 
+
 	public static ApiResponse success(Success success){
 		return new ApiResponse<>(success.getHttpStatusCode(), success.getMessage());
 	}
