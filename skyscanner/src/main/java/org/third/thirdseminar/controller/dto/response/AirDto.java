@@ -3,7 +3,7 @@ package org.third.thirdseminar.controller.dto.response;
 import org.third.thirdseminar.domain.Reservation;
 
 public record AirDto (
-        Long airId,
+        Long reservationId,
         String airName,
         TimeRangeDto startTime,
         TimeRangeDto endTime,
