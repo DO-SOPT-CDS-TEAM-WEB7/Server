@@ -25,15 +25,15 @@ public class MainService {
 
 	public List<CardDto> getCards(){
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd E");
-		NumberFormat priceFormat = NumberFormat.getCurrencyInstance();
-		priceFormat.setCurrency(Currency.getInstance("KRW"));
+		NumberFormat priceFormat = NumberFormat.getInstance(Locale.getDefault());
+
 		return reservationJpaRepository.findAllExcludingCity("삿포로").stream().map((reservation)->
 			CardDto.of(reservation.getCityName(),
 				reservation.getCountry(),
 				format.format(reservation.getStartDate()),
 				format.format(reservation.getEndDate()),
 				reservation.getAir().getAirName(),
-				priceFormat.format(providerMinPrice(reservation.getTickets()))+"원")
+				priceFormat.format(providerMinPrice(reservation.getTickets()))+"원 출발")
 		).collect(Collectors.toList());
 	}
 
