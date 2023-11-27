@@ -15,7 +15,7 @@ public enum Error {
 	 */
 	DUMMY_NOT_FOUND(HttpStatus.NOT_FOUND, "더미에 데이터가 덜 들어간 것 같아요"),
 
-	AIR_NOT_FOUND(HttpStatus.NOT_FOUND, "항공사를 찾지 못했어요."),
+	RESERVATION_NOT_FOUND(HttpStatus.NOT_FOUND, "예약정보를 찾지 못했어요"),
 	/**
 	 * 500 INTERNAL_SERVER_ERROR
 	 */
