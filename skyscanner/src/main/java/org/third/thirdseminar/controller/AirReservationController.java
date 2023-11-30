@@ -1,6 +1,10 @@
 package org.third.thirdseminar.controller;
 
+import java.util.Date;
+
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import org.third.thirdseminar.common.ApiResponse;
 import org.third.thirdseminar.controller.dto.request.AirReservationRequest;
@@ -18,8 +22,9 @@ public class AirReservationController {
     private final ReservationService reservationServcie;
 
     @GetMapping("/reservations")
-    public ApiResponse<AirReservationResponse> getReservertaions(@RequestBody AirReservationRequest request){
-        return ApiResponse.success(Success.GET_RESERVATION_SUCCESS,reservationServcie.getReservations(request));
+    public ApiResponse<AirReservationResponse> getReservertaions(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)Date endDate){
+        return ApiResponse.success(Success.GET_RESERVATION_SUCCESS,reservationServcie.getReservations(startDate,endDate));
     }
 
     @PostMapping("/reservation")
