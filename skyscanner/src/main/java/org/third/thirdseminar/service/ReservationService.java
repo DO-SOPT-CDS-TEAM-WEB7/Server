@@ -34,7 +34,7 @@ public class ReservationService {
     private final ReservationResultJpaRepository reservationResultJpaRepository;
     private final DecimalFormat df = new DecimalFormat("###,###");
 
-    public AirReservationResponse getReservations(AirReservationRequest reqeust){
+    public AirReservationResponse getReservations(Date startDate, Date endDate){
         List<ReservationMinPriceDTO> reservationMinPriceDtoList = reservationJpaRepository.findReservations("일본").stream().map(
                 row -> ReservationMinPriceDTO.of(
                         (Reservation) row[0],
@@ -47,7 +47,7 @@ public class ReservationService {
             Reservation reservation = reservationMinPriceDTO.reservation();
             airList.add(ReservationDto.of(reservation, df.format(reservationMinPriceDTO.minPrice()), TimeRangeFormat(reservation.getStartTime()), TimeRangeFormat(reservation.getEndTime())));
         }
-        DateDto dateDto = new DateDto(reqeust.startDate(), reqeust.endDate());
+        DateDto dateDto = new DateDto(startDate, endDate);
         return new AirReservationResponse(dateDto, airList);
     }
 

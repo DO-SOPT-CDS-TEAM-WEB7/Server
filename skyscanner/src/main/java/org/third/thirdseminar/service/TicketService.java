@@ -2,6 +2,7 @@ package org.third.thirdseminar.service;
 
 import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -45,12 +46,12 @@ public class TicketService {
 					ticket.getComment())).collect(Collectors.toList());
 	}
 
-	public AirResultDto getAirInformation(TicketRequestDto ticketRequestDto){
-		Reservation reservation = reservationJpaRepository.findById(ticketRequestDto.reservationId())
+	public AirResultDto getAirInformation(Date startDate, Date endDate, Long reservationId){
+		Reservation reservation = reservationJpaRepository.findById(reservationId)
 			.orElseThrow( ()-> new NotFoundException(Error.RESERVATION_NOT_FOUND, Error.RESERVATION_NOT_FOUND.getMessage())
 		);
 		Air air= reservation.getAir();
-		DateDto dateDto = new DateDto(ticketRequestDto.startDate(), ticketRequestDto.endDate());	//date 객체 주워오기
+		DateDto dateDto = new DateDto(startDate, endDate);	//date 객체 주워오기
 
 		return AirResultDto.of(
 			dateDto,
